@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Espelho da Urna — Cyberpunk</title>
+
+<style>
+
+/* ---------------------------------------------
+   PALETA CYBERPUNK E VARIÁVEIS
+--------------------------------------------- */
+:root {
+    --neon-blue: #4FC3F7;
+    --neon-green: #1BFF9E;
+    --neon-pink: #FF3EB5;
+    --neon-purple: #C77DFF;
+    --dark-bg: #06060A;
+    --dark-panel: #0D0F18;
+    --text-light: #D9E4FF;
+}
+
+/* ---------------------------------------------
+   ESTILO GLOBAL
+--------------------------------------------- */
+body {
+    margin: 0;
+    background: var(--dark-bg);
+    color: var(--text-light);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    overflow-x: hidden;
+}
+
+h1, h2, h3 {
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 1px;
+}
+
+section {
+    padding: 80px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* ---------------------------------------------
+   FUNDO COM EFEITO SCANLINES
+--------------------------------------------- */
+body::before {
+    content: "";
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    background: repeating-linear-gradient(
+        rgba(255,255,255,0.02) 0px,
+        rgba(255,255,255,0.02) 1px,
+        transparent 2px
+    );
+    z-index: 5;
+}
+
+/* ---------------------------------------------
+   HERO COM ANIMAÇÃO GLOW
+--------------------------------------------- */
+header {
+    text-align: center;
+    padding: 140px 20px;
+    background: linear-gradient(
+        to bottom,
+        rgba(10,20,40,0.8),
+        rgba(0,0,0,0.9)
+    ),
+    url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1350&q=80")
+    center/cover no-repeat;
+    border-bottom: 2px solid var(--neon-blue);
+    animation: borderPulse 5s infinite alternate;
+}
+
+@keyframes borderPulse {
+    from { border-color: var(--neon-blue); }
+    to { border-color: var(--neon-green); }
+}
+
+header h1 {
+    font-size: 3.5rem;
+    text-shadow: 0 0 15px var(--neon-blue);
+    margin-bottom: 20px;
+}
+
+header p {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    max-width: 650px;
+    margin: 0 auto 40px auto;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 30px;
+    margin: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--dark-bg);
+    background: var(--neon-green);
+    box-shadow: 0 0 12px var(--neon-green);
+    transition: 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 18px var(--neon-green);
+}
+
+.btn.white {
+    background: transparent;
+    color: var(--neon-blue);
+    border: 2px solid var(--neon-blue);
+    box-shadow: 0 0 12px var(--neon-blue);
+}
+
+.btn.white:hover {
+    background: rgba(79, 195, 247, 0.1);
+    box-shadow: 0 0 20px var(--neon-blue);
+}
+
+/* ---------------------------------------------
+   CARDS NEON
+--------------------------------------------- */
+.grid {
+    display: grid;
+    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.card {
+    background: var(--dark-panel);
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid var(--neon-purple);
+    box-shadow: 0 0 10px rgba(199,125,255,0.4);
+    transition: 0.25s;
+    position: relative;
+    overflow: hidden;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100px;
+    font-size: 1.1rem;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 25px rgba(199,125,255,0.7);
+}
+
+/* Efeito glitch no hover */
+.card:hover::after {
+    content: "";
+    position: absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%);
+    animation: glitchMove 0.3s linear infinite;
+}
+
+@keyframes glitchMove {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+}
+
+/* ---------------------------------------------
+   PAINEL HOLOGRÁFICO
+--------------------------------------------- */
+.panel {
+    background: linear-gradient(135deg, rgba(30,50,70,0.6), rgba(0,0,0,0.8));
+    border: 1px solid var(--neon-blue);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 18px rgba(79,195,247,0.6);
+}
+
+/* ---------------------------------------------
+   RODAPÉ
+--------------------------------------------- */
+footer {
+    background: #050509;
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--neon-blue);
+    border-top: 2px solid var(--neon-pink);
+    margin-top: 40px;
+}
+
+/* Responsividade */
+@media (max-width: 760px) {
+    header h1 { font-size: 2.5rem; }
+    section { padding: 50px 20px; }
+}
+
+</style>
+<!-- Adicionando Fontes Google Fonts para o estilo Cyberpunk -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Segoe+UI&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- HERO -->
+<header>
+    <h1>O Espelho da Urna</h1>
+    <p>Um painel neon de transparência, análise e verdade eleitoral — para enxergar o Brasil sem filtros.</p>
+
+    <a href="#" class="btn">Acessar Plataforma</a>
+    <a href="#" class="btn white">Receber Atualizações</a>
+</header>
+
+<!-- PROBLEMAS -->
+<section>
+    <h2 style="text-align:center; text-shadow:0 0 8px var(--neon-purple);">O Problema</h2>
+
+    <div class="grid">
+        <div class="card">Desinformação cresce mais rápido que fatos.</div>
+        <div class="card">Distorções emocionais dominam o debate.</div>
+        <div class="card">A memória política do Brasil é curta.</div>
+        <div class="card">As urnas mostram a causa — a vida mostra o efeito.</div>
+    </div>
+</section>
+
+<!-- SOLUÇÃO -->
+<section>
+    <div class="panel">
+        <h2 style="text-align:center; text-shadow:0 0 8px var(--neon-green);">A Solução</h2>
+        <p style="text-align:center; font-size: 1.2rem;">Uma plataforma auditável, com IA explicável e análise 360º do comportamento eleitoral brasileiro.</p>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section>
+    <h2 style="text-align:center; text-shadow:0 0 8px var(--neon-blue);">Funcionalidades</h2>
+
+    <div class="grid">
+        <div class="card">Radar Eleitoral em Tempo Real</div>
+        <div class="card">Mapa Emocional do Eleitorado</div>
+        <div class="card">Linha do Tempo das Decisões</div>
+        <div class="card">Espelho de Coerência Política</div>
+        <div class="card">Biblioteca de Fatos Auditáveis</div>
+        <div class="card">API Pública de Transparência</div>
+    </div>
+</section>
+
+<!-- CALL TO ACTION -->
+<section style="text-align:center;">
+    <h2 style="text-shadow:0 0 8px var(--neon-green);">A Transparência Começa com um Clique</h2>
+    <div style="margin-top: 30px;">
+        <a href="#" class="btn">Entrar</a>
+        <a href="#" class="btn white">Seguir no Instagram</a>
+    </div>
+</section>
+
+<!-- RODAPÉ -->
+<footer>
+    © 2025 O Espelho da Urna • Transparência é Futuro
+</footer>
+
+</body>
+</html>
